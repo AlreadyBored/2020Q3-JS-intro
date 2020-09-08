@@ -41,7 +41,7 @@ describe('Task1', () => {
 
     it.optional('Format values below 1 minute', () => {
 
-      simpleValues = [
+      const simpleValues = [
         5, 10, 30, 45
       ];
 
@@ -62,14 +62,18 @@ describe('Task1', () => {
 
     it.optional('Formats a number of seconds that exactly matches a specific number of minutes', () => {
 
-      testValues = [
-        60, 120, 300, 360
-      ];
-
       expect(formatTime(60)).to.be.equal('1 min');
       expect(formatTime(120)).to.be.equal('2 min');
       expect(formatTime(300)).to.be.equal('5 min');
       expect(formatTime(360)).to.be.equal('6 min');
+    });
+
+    it.optional('Formats a number of seconds that doesn\'t match a specific number of minutes', () => {
+
+      expect(formatTime(78)).to.be.equal('1 min 18 sec');
+      expect(formatTime(982)).to.be.equal('16 min 22 sec');
+      expect(formatTime(400)).to.be.equal('6 min 40 sec');
+      expect(formatTime(1111)).to.be.equal('18 min 31 sec');
     });
   })
 });
