@@ -75,5 +75,28 @@ describe('Task1', () => {
       expect(formatTime(400)).to.be.equal('6 min 40 sec');
       expect(formatTime(1111)).to.be.equal('18 min 31 sec');
     });
+
+    it.optional('Throws an Error in case of wrong values', function() {
+      let res = null;
+      try {
+        formatTime('If I could save time in a bottle...');
+        formatTime(-10);
+        formatTime([10, 300, 100]);
+        formatTime({'java': 'script'});
+      } catch(err) {
+          if (err._validationProp === 'NA') {
+              this.skip();
+            } else {
+              res = 'THROWN';
+            }
+      }
+      
+      assert.equal(res, 'THROWN');
+      
+      /* Simpliest case
+      expect(formatTime(wrongValue)).to.throw();
+      */
+
+  });
   })
 });
